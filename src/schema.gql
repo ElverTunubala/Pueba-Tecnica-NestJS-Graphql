@@ -1,0 +1,51 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  id: ID!
+  email: String!
+}
+
+type Note {
+  id: ID!
+  title: String!
+  content: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Query {
+  notes: [Note!]!
+  note(id: String!): Note!
+}
+
+type Mutation {
+  createNote(createNoteInput: CreateNoteInput!): Note!
+  updateNote(updateNoteInput: UpdateNoteInput!): Note!
+  removeNote(id: String!): Boolean!
+  createUser(createUserInput: CreateUserInput!): User!
+  login(email: String!, password: String!): String!
+  register(data: CreateUserInput!): Boolean!
+}
+
+input CreateNoteInput {
+  title: String!
+  content: String!
+}
+
+input UpdateNoteInput {
+  title: String
+  content: String
+  id: String!
+}
+
+input CreateUserInput {
+  email: String!
+  password: String!
+}

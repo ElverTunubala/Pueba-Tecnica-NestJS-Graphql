@@ -18,30 +18,28 @@ export class NotesResolver {
     @Args('createNoteInput') createNoteInput: CreateNoteInput,
     @CurrentUser() user: User
   ) {
-    return this.notesService.create(createNoteInput, user.id);
+    return this.notesService.create(createNoteInput, user.id)
   }
 
   @Query(() => [Note], { name: 'notes' })
   @UseGuards(GqlAuthGuard)
-  findAll(@CurrentUser() user: { userId: string }) {
-    console.log('Usuario actual:', user);
-    return this.notesService.findAllByUser(user.userId);
+  findAll(@CurrentUser() user: User) {
+    console.log('Usuario actual:', user)
+    return this.notesService.findAllByUser(user.id)
   }
 
   @Query(() => Note, { name: 'note' })
   findOne(@Args('id') id: string) {
-    return this.notesService.findOne(id);
+    return this.notesService.findOne(id)
   }
 
   @Mutation(() => Note)
-  updateNote(
-    @Args('updateNoteInput') updateNoteInput: UpdateNoteInput
-  ) {
-    return this.notesService.update(updateNoteInput.id, updateNoteInput);
+  updateNote(@Args('updateNoteInput') updateNoteInput: UpdateNoteInput) {
+    return this.notesService.update(updateNoteInput.id, updateNoteInput)
   }
 
   @Mutation(() => Boolean)
   removeNote(@Args('id') id: string) {
-    return this.notesService.remove(id);
+    return this.notesService.remove(id)
   }
 }
